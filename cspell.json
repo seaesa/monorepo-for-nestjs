@@ -1,0 +1,45 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en,en-GB",
+  "import": [
+    "@cspell/dict-fullstack/cspell-ext.json",
+    "@cspell/dict-companies/cspell-ext.json",
+    "@cspell/dict-software-terms/cspell-ext.json"
+  ],
+  "dictionaries": [
+    "typescript",
+    "node",
+    "npm",
+    "softwareTerms",
+    "companies",
+    "fullstack",
+    "project-words"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "project-words",
+      "path": "./.cspell/project-words.txt",
+      "addWords": true
+    }
+  ],
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.next/**",
+    "**/.expo/**",
+    "**/.turbo/**",
+    "**/coverage/**",
+    "apps/api/src/generated/**",
+    "apps/api/prisma/migrations/**",
+    "apps/mobile/uniwind-types.d.ts",
+    "apps/web/next-env.d.ts",
+    "**/locales/vi/**",
+    "**/*.lock",
+    "pnpm-lock.yaml",
+    ".playwright-mcp/**",
+    ".serena/**",
+    ".superpowers/**"
+  ],
+  "ignoreRegExpList": ["GHSA(-[a-z0-9]{4}){3}"]
+}

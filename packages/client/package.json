@@ -1,0 +1,47 @@
+{
+  "name": "@repo/client",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Frontend logic shared by web and mobile: typed API client, session, preferences, i18n wiring, react-query hooks, realtime, form + date helpers.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "jest",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "catalog:",
+    "@repo/contracts": "workspace:*",
+    "@repo/i18n": "workspace:*",
+    "axios": "catalog:",
+    "dayjs": "catalog:",
+    "socket.io-client": "catalog:",
+    "zustand": "catalog:"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": "^5",
+    "i18next": "^27",
+    "react": "^19",
+    "react-hook-form": "^7",
+    "react-i18next": "^18",
+    "zod": "^4"
+  },
+  "devDependencies": {
+    "@jest/globals": "30.5.2",
+    "@repo/jest-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@swc/jest": "0.2.39",
+    "@tanstack/react-query": "catalog:",
+    "@types/react": "catalog:",
+    "i18next": "catalog:",
+    "jest": "30.5.2",
+    "react": "catalog:",
+    "react-hook-form": "catalog:",
+    "react-i18next": "catalog:",
+    "typescript": "catalog:",
+    "zod": "catalog:"
+  }
+}

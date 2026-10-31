@@ -1,25 +1,44 @@
 {
   "$schema": "https://turborepo.dev/schema.json",
   "globalDependencies": ["**/.env.*local"],
+  "globalEnv": ["NODE_ENV", "CI"],
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**", "dist/**"]
+      "dependsOn": ["^build", "db:generate"],
+      "env": ["NEXT_PUBLIC_*", "EXPO_PUBLIC_*", "APP_VARIANT", "APP_VERSION", "EAS_PROJECT_ID"],
+      "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**", "dist/**"],
+      "passThroughEnv": ["SENTRY_AUTH_TOKEN", "SENTRY_ORG", "SENTRY_PROJECT"]
     },
     "check-types": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build", "db:generate"]
     },
     "dev": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "db:generate"],
       "cache": false,
       "persistent": true
     },
-    "lint": {},
     "test": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build", "db:generate"]
     },
     "test:e2e": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build", "db:generate"],
+      "cache": false,
+      "env": [
+        "DATABASE_URL",
+        "REDIS_URL",
+        "JWT_*",
+        "PORT",
+        "LOG_LEVEL",
+        "CORS_ORIGINS",
+        "WORKER_CONCURRENCY"
+      ]
+    },
+    "db:generate": {
+      "inputs": ["prisma/schema.prisma"],
+      "outputs": ["src/generated/**"]
+    },
+    "db:migrate": {
+      "cache": false
     }
   }
 }

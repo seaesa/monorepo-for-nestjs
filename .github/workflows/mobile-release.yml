@@ -1,0 +1,64 @@
+name: Mobile release
+
+# Pushing a tag `vX.Y.Z` builds the store binaries (AAB + IPA) and an installable preview APK on
+# EAS. The tag is the app version (APP_VERSION); EAS increments the build number.
+# Needs: secret EXPO_TOKEN, variable EAS_PROJECT_ID. Optional: variable EAS_AUTO_SUBMIT=true to
+# send production builds to the stores (credentials configured with `eas credentials`).
+on:
+  push:
+    tags: ['v*.*.*']
+  workflow_dispatch:
+    inputs:
+      version:
+        description: App version (X.Y.Z)
+        required: true
+  workflow_call: # from release.yml: tags pushed by GITHUB_TOKEN do not trigger workflows
+    inputs:
+      version:
+        type: string
+        required: true
+
+concurrency:
+  group: mobile-release-${{ github.ref }}
+
+env:
+  LEFTHOOK: 0
+  TURBO_TELEMETRY_DISABLED: 1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - profile: production
+            platform: all
+          - profile: preview
+            platform: android
+    env:
+      APP_VERSION: ${{ inputs.version || github.ref_name }}
+      EAS_PROJECT_ID: ${{ vars.EAS_PROJECT_ID }}
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+    defaults:
+      run:
+        working-directory: apps/mobile
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      - run: pnpm install --frozen-lockfile
+      - name: Strip the leading v from the version
+        run: echo "APP_VERSION=${APP_VERSION#v}" >> "$GITHUB_ENV"
+      - name: Build
+        run: >-
+          eas build --non-interactive
+          --profile ${{ matrix.profile }} --platform ${{ matrix.platform }}
+          ${{ matrix.profile == 'production' && vars.EAS_AUTO_SUBMIT == 'true' && '--auto-submit' || '' }}

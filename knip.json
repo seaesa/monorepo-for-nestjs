@@ -1,0 +1,33 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "workspaces": {
+    "apps/api": {
+      "entry": ["src/main.ts", "src/worker.ts", "test/**/*.e2e-spec.ts"]
+    },
+    "apps/web": {
+      "entry": ["app/**/*.{ts,tsx}", "components/ui/*.tsx"]
+    },
+    "apps/mobile": {
+      "entry": ["src/app/**/*.tsx", "src/components/ui/*.tsx"]
+    },
+    "packages/jest-config": {
+      "entry": ["src/*.ts"]
+    },
+    "packages/typescript-config": {
+      "entry": []
+    }
+  },
+  "ignoreDependencies": ["pino-pretty", "pnpm", "postcss-load-config"],
+  "ignoreBinaries": ["expo-doctor"],
+  "rules": {
+    "dependencies": "error",
+    "unlisted": "error",
+    "unresolved": "error",
+    "exports": "error",
+    "types": "error",
+    "nsExports": "off",
+    "nsTypes": "off",
+    "enumMembers": "error",
+    "duplicates": "error"
+  }
+}

@@ -1,8 +1,67 @@
 packages:
-  - "apps/*"
-  - "packages/*"
+  - 'apps/*'
+  - 'packages/*'
+
+# Single source of truth for versions shared by more than one workspace.
+# Use `"pkg": "catalog:"` in package.json instead of pinning a version.
+catalog:
+  class-variance-authority: 0.7.1
+  clsx: 2.1.1
+  tailwind-merge: 3.7.0
+  tailwindcss: 4.3.5
+  tw-animate-css: 1.4.0
+  oxlint: 1.94.0
+  oxlint-tsgolint: 7.0.2007
+  '@tanstack/react-query': 5.107.1
+  '@types/node': 26.6.6
+  '@types/react': 19.3.0
+  axios: 1.21.1
+  dayjs: 1.11.23
+  react: 19.3.0
+  react-dom: 19.3.0
+  react-hook-form: 7.92.0
+  '@hookform/resolvers': 7.0.6
+  socket.io-client: 4.8.4
+  typescript: 7.0.2
+  i18next: 27.1.5
+  react-i18next: 18.0.2
+  zod: 4.6.7
+  zustand: 5.1.0
+
 allowBuilds:
-  "@parcel/watcher": true
-  "@swc/core": true
+  '@parcel/watcher': true
+  '@swc/core': true
+  '@prisma/engines': true
+  '@sentry/cli': true
+  argon2: true
+  lefthook: true
+  msgpackr-extract: true
+  prisma: true
   pnpm: true
   unrs-resolver: true
+
+minimumReleaseAgeExclude:
+  - bullmq@6.5.2
+  - cn@0.5.1
+  - '@expo/cli@58.1.21'
+  - '@expo/metro-config@58.0.23'
+  - '@expo/router-server@58.0.23'
+  - babel-preset-expo@58.0.26
+  - expo-file-system@58.0.14
+  - expo@58.0.26
+  - expo-router@58.0.32
+  - dependency-cruiser@18.8.0
+  - i18next@27.1.5
+  - lucide-react-native@1.74.0
+  - '@scalar/client-side-rendering@0.4.21'
+  - '@scalar/helpers@0.18.1'
+  - '@scalar/nestjs-api-reference@1.2.39'
+  - '@scalar/schemas@0.18.1'
+  - '@scalar/types@0.30.0'
+  - '@scalar/validation@0.6.9'
+
+# dependency-cruiser needs the TS compiler API, which typescript 7.0 lacks; give it its own TS 6.
+packageExtensions:
+  dependency-cruiser:
+    dependencies:
+      typescript: ^6.0.3

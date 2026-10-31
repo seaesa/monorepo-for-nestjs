@@ -1,0 +1,14 @@
+name: Feature
+description: A change to what the product does
+labels: [feature]
+body:
+  - type: textarea
+    attributes:
+      label: Problem
+      description: Who needs it and why. Describe the business rule, not the implementation.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Rules and edge cases
+      description: Permissions, limits, states, what happens offline or on error.

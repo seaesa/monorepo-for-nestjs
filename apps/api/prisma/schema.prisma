@@ -1,0 +1,85 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Conventions: uuid v7 ids, camelCase fields mapped to snake_case columns,
+// plural snake_case table names.
+
+/// Mirrors `locales` in @repo/contracts.
+/// What a user may do beyond their own data; see common/authorization.
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Locale {
+  en
+  vi
+}
+
+model User {
+  id              String    @id @default(uuid(7)) @db.Uuid
+  email           String    @unique
+  name            String
+  passwordHash    String    @map("password_hash")
+  /// en | vi. Language for emails and push notifications; the app syncs it from Settings.
+  locale          Locale    @default(en)
+  role            Role      @default(USER)
+  emailVerifiedAt DateTime? @map("email_verified_at")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  tasks           Task[]
+  devices         Device[]
+
+  @@map("users")
+}
+
+/// Mirrors `taskStatuses` in @repo/contracts.
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+}
+
+model Task {
+  id          String     @id @default(uuid(7)) @db.Uuid
+  ownerId     String     @map("owner_id") @db.Uuid
+  owner       User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  status      TaskStatus @default(TODO)
+  dueAt       DateTime?  @map("due_at")
+  latitude    Float?
+  longitude   Float?
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  @@index([ownerId, status, createdAt])
+  @@map("tasks")
+}
+
+/// Mirrors `devicePlatforms` in @repo/contracts.
+enum DevicePlatform {
+  ios
+  android
+}
+
+/// One row per push token. Re-registering a token moves it to the current user.
+model Device {
+  id        String         @id @default(uuid(7)) @db.Uuid
+  userId    String         @map("user_id") @db.Uuid
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String         @unique
+  platform  DevicePlatform
+  createdAt DateTime       @default(now()) @map("created_at")
+  updatedAt DateTime       @updatedAt @map("updated_at")
+
+  @@index([userId])
+  @@map("devices")
+}

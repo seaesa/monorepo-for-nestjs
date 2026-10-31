@@ -1,0 +1,25 @@
+{
+  "threshold": 1,
+  "minLines": 8,
+  "minTokens": 70,
+  "format": ["typescript", "tsx"],
+  "gitignore": true,
+  "reporters": ["consoleFull"],
+  "absolute": false,
+  "ignore": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.next/**",
+    "**/.expo/**",
+    "**/.turbo/**",
+    "**/coverage/**",
+    "apps/api/src/generated/**",
+    "apps/api/prisma/migrations/**",
+    "apps/mobile/uniwind-types.d.ts",
+    "apps/web/next-env.d.ts",
+    "**/*.spec.ts",
+    "apps/web/components/ui/**",
+    "apps/mobile/src/components/ui/**",
+    ".superpowers/**"
+  ]
+}

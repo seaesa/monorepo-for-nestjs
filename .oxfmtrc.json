@@ -1,0 +1,60 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 100,
+  "singleQuote": true,
+  "semi": true,
+  "trailingComma": "all",
+  "sortPackageJson": false,
+  "sortImports": {
+    "internalPattern": ["@repo/", "@/"],
+    "customGroups": [
+      { "groupName": "repo", "elementNamePattern": ["@repo/**"] },
+      { "groupName": "alias", "elementNamePattern": ["@/**"] }
+    ],
+    "groups": [
+      "side_effect",
+      "builtin",
+      "external",
+      "repo",
+      "alias",
+      ["parent", "sibling", "index"],
+      "unknown"
+    ],
+    "newlinesBetween": true
+  },
+  "overrides": [
+    {
+      "files": ["apps/web/**"],
+      "options": {
+        "sortTailwindcss": {
+          "stylesheet": "./apps/web/app/globals.css",
+          "functions": ["cn", "cva"]
+        }
+      }
+    },
+    {
+      "files": ["apps/mobile/**"],
+      "options": {
+        "sortTailwindcss": {
+          "stylesheet": "./apps/mobile/src/global.css",
+          "functions": ["cn", "cva"]
+        }
+      }
+    }
+  ],
+  "ignorePatterns": [
+    "**/dist/**",
+    "**/.next/**",
+    "**/.expo/**",
+    "**/.turbo/**",
+    "**/coverage/**",
+    "**/generated/**",
+    "apps/api/prisma/migrations/**",
+    "apps/mobile/uniwind-types.d.ts",
+    "apps/web/next-env.d.ts",
+    "pnpm-lock.yaml",
+    ".playwright-mcp/**",
+    ".serena/**",
+    ".superpowers/**"
+  ]
+}

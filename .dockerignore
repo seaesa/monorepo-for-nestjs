@@ -1,0 +1,9 @@
+**/node_modules
+**/dist
+**/.next
+**/.turbo
+**/.expo
+**/.env
+**/.env.local
+.git
+.playwright-mcp

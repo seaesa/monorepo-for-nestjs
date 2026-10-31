@@ -3,6 +3,7 @@
   "rootDir": ".",
   "testEnvironment": "node",
   "testRegex": ".e2e-spec.ts$",
+  "setupFiles": ["<rootDir>/setup-env.js"],
   "transform": {
     "^.+\\.(t|j)s$": [
       "@swc/jest",
@@ -23,5 +24,8 @@
       }
     ]
   },
-  "transformIgnorePatterns": []
+  "transformIgnorePatterns": [],
+  "moduleNameMapper": {
+    "^(\\.{1,2}/.*)\\.js$": "$1"
+  }
 }

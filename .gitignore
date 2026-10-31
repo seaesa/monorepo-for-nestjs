@@ -17,8 +17,6 @@ node_modules
 blob-report/
 coverage
 test-results/
-playwright/.cache/
-playwright-report/
 
 
 # Turbo
@@ -60,3 +58,11 @@ pnpm-debug.log*
 # Misc
 .DS_Store
 *.pem
+
+# Tooling
+.playwright-mcp/
+.expo/
+*.tsbuildinfo
+.serena
+.superpowers/
+.impeccable/

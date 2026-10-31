@@ -1,0 +1,210 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "oxc", "import", "promise", "node"],
+  "jsPlugins": ["eslint-plugin-turbo"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "warn"
+  },
+  "options": {
+    "typeAware": true,
+    "reportUnusedDisableDirectives": "error"
+  },
+  "env": {
+    "node": true,
+    "es2024": true
+  },
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.next/**",
+    "**/.expo/**",
+    "**/.turbo/**",
+    "**/coverage/**",
+    "**/generated/**",
+    "**/*.d.ts",
+    "apps/mobile/android/**",
+    "apps/mobile/ios/**",
+    ".superpowers/**"
+  ],
+  "rules": {
+    "import/namespace": "off",
+    "import/no-cycle": [
+      "error",
+      {
+        "maxDepth": 8
+      }
+    ],
+    "import/no-duplicates": "error",
+    "import/no-self-import": "error",
+    "no-console": [
+      "error",
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+    "eqeqeq": [
+      "error",
+      "always",
+      {
+        "null": "ignore"
+      }
+    ],
+    "typescript/no-floating-promises": "error",
+    "typescript/no-misused-promises": "error",
+    "typescript/consistent-type-imports": "error",
+    "typescript/no-explicit-any": "error",
+    "turbo/no-undeclared-env-vars": "warn",
+    "typescript/no-extraneous-class": [
+      "error",
+      {
+        "allowWithDecorator": true
+      }
+    ],
+    "typescript/no-unsafe-type-assertion": "off",
+    "no-underscore-dangle": "off",
+    "import/no-unassigned-import": "off",
+    "import/no-named-as-default-member": "off",
+    "node/no-process-env": "error",
+    "no-magic-numbers": [
+      "error",
+      {
+        "ignore": [-1, 0, 1, 2],
+        "ignoreArrayIndexes": true,
+        "ignoreDefaultValues": true,
+        "ignoreClassFieldInitialValues": true,
+        "ignoreEnums": true,
+        "ignoreNumericLiteralTypes": true,
+        "ignoreReadonlyClassProperties": true,
+        "ignoreTypeIndexes": true,
+        "detectObjects": false,
+        "enforceConst": true
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["apps/web/**", "apps/mobile/**", "packages/client/**"],
+      "plugins": ["react", "jsx-a11y"],
+      "jsPlugins": [
+        {
+          "name": "react-compiler",
+          "specifier": "eslint-plugin-react-hooks"
+        },
+        "@tanstack/eslint-plugin-query"
+      ],
+      "env": {
+        "browser": true
+      },
+      "rules": {
+        "react/rules-of-hooks": "error",
+        "react/exhaustive-deps": "error",
+        "react/react-in-jsx-scope": "off",
+        "react-compiler/static-components": "error",
+        "react-compiler/use-memo": "error",
+        "react-compiler/void-use-memo": "error",
+        "react-compiler/preserve-manual-memoization": "error",
+        "react-compiler/incompatible-library": "warn",
+        "react-compiler/immutability": "error",
+        "react-compiler/globals": "error",
+        "react-compiler/refs": "error",
+        "react-compiler/set-state-in-effect": "error",
+        "react-compiler/error-boundaries": "error",
+        "react-compiler/purity": "error",
+        "react-compiler/set-state-in-render": "error",
+        "react-compiler/unsupported-syntax": "warn",
+        "@tanstack/query/exhaustive-deps": "error",
+        "@tanstack/query/no-rest-destructuring": "error",
+        "@tanstack/query/stable-query-client": "error",
+        "@tanstack/query/no-unstable-deps": "error",
+        "@tanstack/query/no-void-query-fn": "error",
+        "@tanstack/query/infinite-query-property-order": "error",
+        "@tanstack/query/mutation-property-order": "error",
+        "typescript/consistent-return": "off",
+        "typescript/no-misused-promises": [
+          "error",
+          {
+            "checksVoidReturn": {
+              "attributes": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "files": ["apps/web/**"],
+      "plugins": ["nextjs"],
+      "rules": {
+        "nextjs/no-img-element": "error",
+        "nextjs/no-html-link-for-pages": "error",
+        "nextjs/no-sync-scripts": "error"
+      }
+    },
+    {
+      "files": ["apps/mobile/**"],
+      "env": {
+        "browser": false
+      },
+      "rules": {
+        "jsx-a11y/alt-text": "off",
+        "jsx-a11y/anchor-is-valid": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
+        "jsx-a11y/label-has-associated-control": "off",
+        "react/style-prop-object": "off",
+        "jsx-a11y/prefer-tag-over-role": "off"
+      },
+      "plugins": ["react", "jsx-a11y"]
+    },
+    {
+      "files": ["apps/api/**"],
+      "rules": {
+        "typescript/consistent-type-imports": "off"
+      }
+    },
+    {
+      "files": ["**/*.spec.ts", "**/*.spec.tsx", "**/*.e2e-spec.ts"],
+      "plugins": ["jest"],
+      "env": {
+        "jest": true
+      },
+      "rules": {
+        "no-await-in-loop": "off",
+        "no-magic-numbers": "off",
+        "node/no-process-env": "off"
+      }
+    },
+    {
+      "files": ["**/scripts/**"],
+      "rules": {
+        "no-console": "off"
+      }
+    },
+    {
+      "files": [
+        "**/env.ts",
+        "**/*.config.ts",
+        "**/*.config.js",
+        "**/*.config.mjs",
+        "**/scripts/**",
+        "**/test/**"
+      ],
+      "rules": {
+        "node/no-process-env": "off",
+        "no-magic-numbers": "off"
+      }
+    },
+    {
+      "files": ["**/components/ui/**"],
+      "rules": {
+        "no-magic-numbers": "off",
+        "jsx-a11y/label-has-associated-control": "off",
+        "jsx-a11y/prefer-tag-over-role": "off",
+        "react/no-array-index-key": "off",
+        "react/jsx-no-constructed-context-values": "off"
+      },
+      "plugins": ["react", "jsx-a11y"]
+    }
+  ]
+}

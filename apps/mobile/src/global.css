@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+@import 'uniwind';
+@import 'tw-animate-css';
+/* Colors + radius come from packages/theme/src/tokens.ts (shared with web). */
+@import '@repo/theme/native.css';
+
+@theme {
+  --spacing-hairline: hairlineWidth();
+}

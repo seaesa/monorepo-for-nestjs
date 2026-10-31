@@ -7,23 +7,43 @@
     "dev": "next dev --port 3001",
     "build": "next build",
     "start": "next start --port 3001",
-    "lint": "eslint . --max-warnings 0",
-    "check-types": "tsc --noEmit"
+    "check-types": "next typegen && tsc --noEmit",
+    "ui:add": "shadcn add"
   },
   "dependencies": {
-    "@repo/ui": "workspace:*",
-    "next": "16.4.2",
-    "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "@base-ui/react": "1.9.0",
+    "@hugeicons/core-free-icons": "4.4.0",
+    "@hugeicons/react": "1.1.10",
+    "@repo/client": "workspace:*",
+    "@repo/contracts": "workspace:*",
+    "@repo/i18n": "workspace:*",
+    "@repo/theme": "workspace:*",
+    "@sentry/nextjs": "11.13.0",
+    "@t3-oss/env-nextjs": "0.13.11",
+    "@tanstack/react-query": "catalog:",
+    "class-variance-authority": "catalog:",
+    "clsx": "catalog:",
+    "i18next": "catalog:",
+    "next": "16.4.6",
+    "next-themes": "0.4.6",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-hook-form": "catalog:",
+    "react-i18next": "catalog:",
+    "server-only": "^0.0.1",
+    "sonner": "2.0.8",
+    "tailwind-merge": "catalog:",
+    "tw-animate-css": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
-    "@repo/api": "workspace:*",
-    "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@types/node": "26.6.5",
-    "@types/react": "19.3.0",
+    "@tailwindcss/postcss": "4.3.5",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
     "@types/react-dom": "19.3.0",
-    "eslint": "10.13.0",
-    "typescript": "7.0.2"
+    "shadcn": "4.23.0",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:"
   }
 }

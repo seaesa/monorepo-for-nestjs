@@ -1,0 +1,37 @@
+{
+  "name": "@repo/i18n",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Translations for web, mobile and the API (emails, push): typed dictionaries, error and validation messages.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch --preserveWatchOutput",
+    "test": "jest",
+    "check-types": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.spec.json --noEmit"
+  },
+  "dependencies": {
+    "@repo/contracts": "workspace:*",
+    "i18next": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@jest/globals": "30.5.2",
+    "@repo/jest-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@swc/jest": "0.2.39",
+    "jest": "30.5.2",
+    "typescript": "catalog:"
+  }
+}

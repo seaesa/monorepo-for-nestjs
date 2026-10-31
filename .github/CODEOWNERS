@@ -1,0 +1,12 @@
+# Reviewers requested automatically. Later lines win. Replace with teams as the project grows,
+# e.g. `/apps/mobile/ @org/mobile`.
+* @seaesa
+
+# Public API and shared rules: every app depends on these.
+/packages/contracts/ @seaesa
+/packages/i18n/ @seaesa
+/apps/api/prisma/ @seaesa
+/apps/api/src/common/authorization/ @seaesa
+/.github/ @seaesa
+/AGENTS.md @seaesa
+/docs/agents/ @seaesa

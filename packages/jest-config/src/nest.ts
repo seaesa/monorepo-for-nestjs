@@ -1,4 +1,5 @@
 import type { Config } from 'jest';
+
 import { config as baseConfig } from './base';
 
 const swcOptions = {
@@ -25,6 +26,9 @@ export const nestConfig = {
     '^.+\\.(t|j)s$': ['@swc/jest', swcOptions],
   },
   transformIgnorePatterns: [],
+  // Prisma's generated client uses `.js` specifiers for `.ts` files.
+  moduleNameMapper: { '^(\\.{1,2}/.*)\\.js$': '$1' },
+  collectCoverage: false,
   collectCoverageFrom: ['**/*.(t|j)s'],
   coverageDirectory: '../coverage',
   testEnvironment: 'node',

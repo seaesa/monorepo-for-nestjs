@@ -1,0 +1,20 @@
+name: Bug
+description: Something does not work as the product intends
+labels: [bug]
+body:
+  - type: textarea
+    attributes:
+      label: What happened
+      description: Steps, expected vs actual. Include the error code and request id if shown.
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Where
+      multiple: true
+      options: [api, web, mobile (iOS), mobile (Android), worker]
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Version or commit

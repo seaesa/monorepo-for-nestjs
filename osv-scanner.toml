@@ -1,0 +1,17 @@
+# Accepted vulnerabilities. Each entry needs a reason and an expiry; the scan fails again after
+# `ignoreUntil`, so the exception gets re-checked instead of living forever.
+
+[[IgnoredVulns]]
+id = "GHSA-fc5q-39xc-vjpf" # picomatch ReDoS
+ignoreUntil = 2027-02-17
+reason = "No fixed release yet. Only build/test tooling (jest, knip) matches globs we write; nothing in a production bundle."
+
+[[IgnoredVulns]]
+id = "GHSA-g3hv-75wg-m249" # minimatch globparts amplification
+ignoreUntil = 2027-02-17
+reason = "Fix only in minimatch 11 (major), outside the ranges of our tooling. Dev/build-time only; patterns are ours."
+
+[[IgnoredVulns]]
+id = "GHSA-3g3m-2fjr-6pw4" # glob AbortSignal bypass
+ignoreUntil = 2027-02-17
+reason = "Fix only in glob 14 (major). Used by jest and the Sentry bundler plugin at build time; no AbortSignal use."
